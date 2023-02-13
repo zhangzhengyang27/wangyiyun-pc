@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="css/live.css">
     <link rel="stylesheet" type="text/css" href="css/system.css">
     <link rel="stylesheet" type="text/css" href="css/technology.css">
+    <link rel="stylesheet" type="text/css" href="css/web.css">
 </head>
 <body>
 <div id="app">
@@ -236,6 +237,20 @@
                         <div class='technology-content-name'>{{item.title}}</div>
                         <div class='technology-content-title'>{{item.desc}}</div>
                     </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 后端开发模块-->
+    <div class='system seckill web-model'>
+        <h2>后端开发</h2>
+        <ul class='seckill-tab-content-ul'>
+            <li v-for="item in contentList">
+                <a href="#">
+                    <div class='seckill-tab-content-ul-outer'><img src="image/web-leo.gif"></div>
+                    <div class='seckill-tab-content-ul-name'>{{item.title}}</div>
+                    <div class='seckill-tab-content-ul-user'>{{item.name}}</div>
                 </a>
             </li>
         </ul>
@@ -507,6 +522,28 @@
                     desc: "精通JAVA/高并发/微服务/分布式/中间件"
                 },
             ],
+            contentList: [
+                {
+                    title: "Web前端,从零基础到全栈工程师",
+                    name:"李游Leo"
+                },
+                {
+                    title: "Node.js全栈开发之路",
+                    name:"IT老兵"
+                },
+                {
+                    title: "Web前端,从零基础到全栈工程师",
+                    name:"李游Leo"
+                },
+                {
+                    title: "Web前端,从零基础到全栈工程师",
+                    name:"李游Leo"
+                },
+                {
+                    title: "Web前端,从零基础到全栈工程师",
+                    name:"李游Leo"
+                }
+            ]
         },
         mounted() {
             this.downloadTouch();
