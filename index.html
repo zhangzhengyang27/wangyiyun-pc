@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="css/technology.css">
     <link rel="stylesheet" type="text/css" href="css/web.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/link.css">
 </head>
 <body>
 <div id="app">
@@ -305,6 +306,40 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- window-show 右侧广告窗-->
+    <div class='window-show'>
+        <a href="#" class='window-show-top'><img src="image/sjfxs.png"></a>
+        <ul class='window-show-ul'>
+            <li class='window-show-ul-text show-m'>
+                <div class='window-show-ul-text-name'>在线咨询</div>
+            </li>
+            <li class='window-show-ul-line'>
+                <div class='line'></div>
+            </li>
+            <li class='window-show-ul-text show-mobile'>
+                <div class='window-show-ul-text-name'>手机课堂</div>
+                <div class='show-alert'>
+                    <div class='show-alert-jt'></div>
+                    <div class='show-alert-node'>
+                        <img src="image/ewm-l.png">
+                        <p>下载APP</p>
+                    </div>
+                    <div class='show-alert-node ml15'>
+                        <img src="image/ewm-r.png">
+                        <p>关注微信</p>
+                    </div>
+                </div>
+
+            </li>
+            <li class='window-show-ul-line'>
+                <div class='line'></div>
+            </li>
+            <li class='window-show-ul-text show-t'>
+                <div class='window-show-ul-text-name'>返回顶部</div>
+            </li>
+        </ul>
     </div>
 
 </div>
@@ -602,9 +637,10 @@
             this.userImageTouch();
             this.searchEvent();
             this.slider();
-            this.openShow()
-        }
-        ,
+            this.openShow();
+            this.bannerShow();
+            this.windowScroll()
+        },
         methods: {
             // 下载按钮触摸事件
             downloadTouch() {
@@ -902,6 +938,71 @@
                     openUl.style.left = '10px';
                 };
             },
+            // 导航栏的下拉事件
+            bannerShow() {
+                var allLi = document.getElementsByClassName('banner-a');
+                var allshowOl = document.getElementsByClassName('active-ol');
+                var rightOl = document.getElementsByClassName('right-ol')[0];
+                for (var i = 0; i < allLi.length; i++) {
+                    allLi[i].onmouseover = function () {
+                        for (var i = 0; i < allshowOl.length; i++) {
+                            allshowOl[i].style.display = 'none';
+                        }
+                        if (this.parentNode.getElementsByClassName('active-ol')[0]) {
+                            this.parentNode.getElementsByClassName('active-ol')[0].style.display = 'block';
+                        }
+
+                    }
+                }
+
+                topBanner.onmouseleave = function () {
+                    for (var i = 0; i < allshowOl.length; i++) {
+                        allshowOl[i].style.display = 'none';
+                    }
+                };
+
+                rightOl.onmouseenter = function () {
+                    for (var i = 0; i < allshowOl.length; i++) {
+                        allshowOl[i].style.display = 'none';
+                    }
+                };
+
+            },
+            windowScroll() {
+                var topNode = document.getElementsByClassName('topNode')[0];
+                var topNodeCopy = document.getElementsByClassName('topNode-copy')[0];
+                var windowShow = document.getElementsByClassName('window-show')[0];
+                var showT = document.getElementsByClassName('show-t')[0];
+                var timer = null;
+                window.onscroll = function () {
+
+                    if (document.documentElement.scrollTop >= 1) {
+                        windowShow.style.display = 'block';
+                    } else {
+                        windowShow.style.display = 'none';
+                    }
+
+                    if (document.documentElement.scrollTop >= 550) {
+                        topNode.style.position = 'fixed';
+                        topNodeCopy.style.display = 'block';
+                    } else {
+                        topNode.style.position = 'relative';
+                        topNodeCopy.style.display = 'none';
+                    }
+                    //console.log(document.documentElement.scrollTop)
+                };
+
+                showT.onclick = function () {
+                    clearInterval(timer);
+                    timer = setInterval(function () {
+                        if (document.documentElement.scrollTop <= 0) {
+                            clearInterval(timer);
+                            return;
+                        }
+                        document.documentElement.scrollTop = document.documentElement.scrollTop - 100 < 0 ? 0 : document.documentElement.scrollTop - 100;
+                    }, 0);
+                };
+            }
         }
     })
 </script>
