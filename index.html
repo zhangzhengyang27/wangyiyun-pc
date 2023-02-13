@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/topNode.css">
     <link rel="stylesheet" type="text/css" href="css/topBanner.css">
     <link rel="stylesheet" type="text/css" href="css/slider.css">
+    <link rel="stylesheet" type="text/css" href="css/openContent.css">
 </head>
 <body>
 <div id="app">
@@ -158,6 +159,32 @@
         </div>
     </div>
 
+    <!-- open-content 名师公开课-->
+    <div class='open-content'>
+        <div class='card-left'></div>
+        <div class='card-right'></div>
+        <h2>名师公开课</h2>
+        <a href="#" class='more'>更多</a>
+        <div class='open-content-slider'>
+            <ul class="open-content-slider-card">
+                <li v-for="item in openContent">
+                    <a href="#">
+                        <div class='card-user'>
+                            <img src="image/user.png">
+                        </div>
+                        <div class='time'>{{item.time}}</div>
+                        <div class='content'>{{item.title}}</div>
+                        <div class='user-name'>
+                            <span class='title-user'>{{item.author}}</span>
+                            <div class='title-box'>{{item.authorSub}}</div>
+                        </div>
+                        <div class='bottom-title'>{{item.type}}</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
 </div>
 <script src="./js/vue2.6.0.js"></script>
 
@@ -166,27 +193,28 @@
         el: '#app',
         data: {
             message: 'Hello Vue!',
-            myStudy: [{
-                "name": "前端工程师就业班",
-                "img": "image/k-1.png",
-                "nowStufy": "放大与缩小"
-            }, {
-                "name": "Web前端，从零基础到全栈工程师",
-                "img": "image/k-2.png",
-                "nowStufy": ""
-            }, {
-                "name": "前端小白面试指南",
-                "img": "image/k-3.png",
-                "nowStufy": ""
-            }, {
-                "name": "李游Leo - WEB前端公开课",
-                "img": "image/k-4.png",
-                "nowStufy": ""
-            }, {
-                "name": "JavaScript - 移动端开发经典教程",
-                "img": "image/k-5.png",
-                "nowStufy": ""
-            }],
+            myStudy: [
+                {
+                    "name": "前端工程师就业班",
+                    "img": "image/k-1.png",
+                    "nowStufy": "放大与缩小"
+                }, {
+                    "name": "Web前端，从零基础到全栈工程师",
+                    "img": "image/k-2.png",
+                    "nowStufy": ""
+                }, {
+                    "name": "前端小白面试指南",
+                    "img": "image/k-3.png",
+                    "nowStufy": ""
+                }, {
+                    "name": "李游Leo - WEB前端公开课",
+                    "img": "image/k-4.png",
+                    "nowStufy": ""
+                }, {
+                    "name": "JavaScript - 移动端开发经典教程",
+                    "img": "image/k-5.png",
+                    "nowStufy": ""
+                }],
             bannerList: [
                 {
                     name: "首页",
@@ -330,6 +358,43 @@
                         }]
                 }
             ],
+            openContent: [
+                {
+                    time: "12月21日 20:00",
+                    title: "零基础轻松学Python",
+                    author: "毕滢",
+                    authorSub: "清华码神",
+                    type: "编程小白的Python入门课"
+                },
+                {
+                    time: "12月21日 20:00",
+                    title: "零基础轻松学Python",
+                    author: "毕滢",
+                    authorSub: "清华码神",
+                    type: "编程小白的Python入门课"
+                },
+                {
+                    time: "12月21日 20:00",
+                    title: "零基础轻松学Python",
+                    author: "毕滢",
+                    authorSub: "清华码神",
+                    type: "编程小白的Python入门课"
+                },
+                {
+                    time: "12月21日 20:00",
+                    title: "零基础轻松学Python",
+                    author: "毕滢",
+                    authorSub: "清华码神",
+                    type: "编程小白的Python入门课"
+                },
+                {
+                    time: "12月21日 20:00",
+                    title: "零基础轻松学Python",
+                    author: "毕滢",
+                    authorSub: "清华码神",
+                    type: "编程小白的Python入门课"
+                }
+            ]
         },
         mounted() {
             this.downloadTouch();
@@ -337,6 +402,7 @@
             this.userImageTouch();
             this.searchEvent();
             this.slider();
+            this.openShow()
         }
         ,
         methods: {
@@ -348,7 +414,6 @@
 
 
                 downloadAppBtn.onmouseover = function () {
-                    console.log("111")
                     clearTimeout(timer);
                     if (downloadAppShow.style.display == 'block') return;
                     downloadAppShow.style.display = 'block';
@@ -376,8 +441,7 @@
                         downloadAppShow.style.display = 'none';
                     }, 0);
                 };
-            }
-            ,
+            },
             //我的学习触碰事件
             myTouch() {
                 var myButton = document.getElementsByClassName('bannerTop-my')[0];
@@ -412,8 +476,7 @@
                         myContent.style.display = 'none';
                     }, 100);
                 };
-            }
-            ,
+            },
             // 用户头像触摸事件
             userImageTouch() {
                 var userImage = document.getElementsByClassName('user-image')[0];
@@ -448,8 +511,7 @@
                         userUl.style.display = 'none';
                     }, 300);
                 };
-            }
-            ,
+            },
             //搜索框事件
             searchEvent() {
                 var searchLeftChangeButton = document.getElementsByClassName('searchNodeLeft')[0];
@@ -621,7 +683,25 @@
                         silderContentNode.style.backgroundColor = colorArr[num];
                     }, 5000);
                 }
-            }
+            },
+            openShow() {
+                var leftBtn = document.getElementsByClassName('card-left')[0];
+                var rightBtn = document.getElementsByClassName('card-right')[0];
+                var openUl = document.getElementsByClassName('open-content-slider-card')[0];
+                rightBtn.style.display = 'none';
+
+                leftBtn.onclick = function () {
+                    this.style.display = 'none';
+                    rightBtn.style.display = 'block';
+                    openUl.style.left = '-368px';
+                };
+
+                rightBtn.onclick = function () {
+                    this.style.display = 'none';
+                    leftBtn.style.display = 'block';
+                    openUl.style.left = '10px';
+                };
+            },
         }
     })
 </script>
