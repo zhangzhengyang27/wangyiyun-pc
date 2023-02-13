@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/topNode.css">
     <link rel="stylesheet" type="text/css" href="css/topBanner.css">
+    <link rel="stylesheet" type="text/css" href="css/slider.css">
 </head>
 <body>
 <div id="app">
@@ -132,6 +133,31 @@
             </ol>
         </li>
     </ul>
+
+    <!-- silder-content 轮播图-->
+    <div class='silder-content'>
+        <div class='silder-content-outerNode'>
+            <ul class='silder-content-UlNode'>
+                <li class='active'><img src="image/4de5a95b9c0a458c9c4f5595b0d12183.png"></li>
+                <li><img src="image/6ca7db807c3f448fa19039cae380ffb7.jpg"></li>
+                <li><img src="image/9da551a2ceee48fcae68db05b562cff1.jpg"></li>
+                <li><img src="image/a17ddac75cc944b9b0f5204156e2afa6.png"></li>
+                <li><img src="image/19055192bca54c5ea9622d8f672fd8e1.png"></li>
+                <li><img src="image/81f375340e0c48b7a4d1b9c853eab8ce.png"></li>
+                <li><img src="image/79b6a4b0bd644681b1d2a5ec3c10da65.jpg"></li>
+            </ul>
+            <ol class='silder-content-button'>
+                <li class='first active'><a href="#">专题特惠：前端零基础全栈之旅</a></li>
+                <li><a href="#">0元领取：站酷大神带你入门UI</a></li>
+                <li><a href="#">高效提升：3节课练就口语技能</a></li>
+                <li><a href="#">限时免费：如何获取稳定投资收益</a></li>
+                <li><a href="#">金融思维：25个经典案例解析</a></li>
+                <li><a href="#">免费试听：清华大神教你Python</a></li>
+                <li><a href="#">新课特惠：网课变现全流程进阶课</a></li>
+            </ol>
+        </div>
+    </div>
+
 </div>
 <script src="./js/vue2.6.0.js"></script>
 
@@ -310,6 +336,7 @@
             this.myTouch();
             this.userImageTouch();
             this.searchEvent();
+            this.slider();
         }
         ,
         methods: {
@@ -524,6 +551,76 @@
                     searchLeftUl.style.display = 'none';
                 };
 
+            },
+            slider() {
+                var timer = null;
+                var num = 0;
+                var setInterSlider = null;
+                var allSilderButton = document.getElementsByClassName('silder-content-button')[0];
+                var allSliderContent = document.getElementsByClassName('silder-content-UlNode')[0].children;
+                var allLi = allSilderButton.children;
+                var silderContentNode = document.getElementsByClassName('silder-content')[0];
+                var colorArr = ['#5a73c6', '#f5a52c', '#f9a916', '#f64b3a', '#283042', '#0096ee', '#2b409b'];
+                allSliderContent[0].style.opacity = 1;
+                for (var i = 0; i < allLi.length; i++) {
+                    allLi[i].index = i;
+                    allLi[i].onmouseover = function () {
+
+                        clearInterval(timer);
+                        timer = setTimeout(function () {
+                            move(this);
+                            go();
+
+                        }.bind(this), 500)
+                    }
+                }
+
+                function move(_this) {
+                    num = _this.index;
+                    for (var i = 0; i < allLi.length; i++) {
+                        allSliderContent[i].className = '';
+                        allSliderContent[i].style.opacity = 0;
+                        if (allLi[i].className.indexOf('first') != -1) {
+                            allLi[i].className = 'first';
+                        } else {
+                            allLi[i].className = '';
+                        }
+                    }
+
+                    allSliderContent[_this.index].className = 'active';
+                    setTimeout(function () {
+                        allSliderContent[this.index].style.opacity = '1';
+                    }.bind(_this), 0);
+                    _this.className += ' active';
+                    silderContentNode.style.backgroundColor = colorArr[_this.index];
+                };
+
+
+                go();
+
+                function go() {
+                    clearInterval(setInterSlider);
+                    setInterSlider = setInterval(function () {
+                        num++;
+                        if (num == allLi.length) num = 0;
+                        for (var i = 0; i < allLi.length; i++) {
+                            allSliderContent[i].className = '';
+                            allSliderContent[i].style.opacity = 0;
+                            if (allLi[i].className.indexOf('first') != -1) {
+                                allLi[i].className = 'first';
+                            } else {
+                                allLi[i].className = '';
+                            }
+                        }
+
+                        allSliderContent[num].className = 'active';
+                        setTimeout(function () {
+                            allSliderContent[num].style.opacity = '1';
+                        }, 0);
+                        allLi[num].className += ' active';
+                        silderContentNode.style.backgroundColor = colorArr[num];
+                    }, 5000);
+                }
             }
         }
     })
