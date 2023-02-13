@@ -5,9 +5,11 @@
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/topNode.css">
+    <link rel="stylesheet" type="text/css" href="css/topBanner.css">
 </head>
 <body>
 <div id="app">
+    <!-- topNode -->
     <div class='topNode-copy'></div>
     <div class="topNode">
         <div class="topNodeContent">
@@ -101,6 +103,35 @@
             </div>
         </div>
     </div>
+
+    <!-- topBanner -->
+    <ul class='topBanner' id='topBanner'>
+        <li v-for="item in bannerList">
+            <a href="#" class="banner-a">{{item.name}}</a>
+            <div class='greenLine'></div>
+            <ol class='active-ol' v-for="item1 in item.type">
+                <li><a href="#">公办软件</a></li>
+                <li><a href="#">效率工具</a></li>
+                <li><a href="#">求职准备</a></li>
+                <li><a href="#">个人提升</a></li>
+                <li><a href="#">职场能力</a></li>
+                <li><a href="#">商业管理</a></li>
+                <li><a href="#">专业岗位</a></li>
+                <li><a href="#">电脑基础</a></li>
+            </ol>
+        </li>
+        <li class='right'>
+            <a href="#">
+                <img src="image/pointer.gif">
+            </a>
+            <ol class='right-ol'>
+                <li v-for="item in ['电商运行','职业考试','语言学习']">
+                    <a href="#">{{item}}</a>
+                    <div class='lineRight'></div>
+                </li>
+            </ol>
+        </li>
+    </ul>
 </div>
 <script src="./js/vue2.6.0.js"></script>
 
@@ -129,15 +160,158 @@
                 "name": "JavaScript - 移动端开发经典教程",
                 "img": "image/k-5.png",
                 "nowStufy": ""
-            }]
+            }],
+            bannerList: [
+                {
+                    name: "首页",
+                },
+                {
+                    name: "实用英语",
+                },
+                {
+                    name: "兴趣技能",
+                },
+                {
+                    name: "职场提升",
+                    type: [
+                        {
+                            "id": "1",
+                            "name": "办公软件"
+                        },
+                        {
+                            "id": "2",
+                            "name": "效率工具"
+                        },
+                        {
+                            "id": "3",
+                            "name": "求值准备",
+                        },
+                        {
+                            "id": "4",
+                            "name": "个人提升"
+                        },
+                        {
+                            "id": "5",
+                            "name": "职场能力"
 
+                        },
+                        {
+                            "id": "6",
+                            "name": "商业管理"
+                        },
+                        {
+                            "id": "7",
+                            "name": "专业管理",
+                        },
+                        {
+                            "id": "8",
+                            "name": "电脑基础"
+                        }
+                    ]
+                },
+                {
+                    name: "编程与开发",
+                    type: [
+                        {
+                            "id": "1",
+                            "name": "编程语言"
+                        },
+                        {
+                            "id": "2",
+                            "name": "前端开发"
+                        },
+                        {
+                            "id": "3",
+                            "name": "后端开发",
+                        },
+                        {
+                            "id": "4",
+                            "name": "移动开发"
+                        },
+                        {
+                            "id": "5",
+                            "name": "网络与安全"
+                        }]
+                },
+                {
+                    name: "AI/数据科学",
+                    type: [
+                        {
+                            "id": "1",
+                            "name": "编程语言"
+                        },
+                        {
+                            "id": "2",
+                            "name": "前端开发"
+                        },
+                        {
+                            "id": "3",
+                            "name": "后端开发",
+                        },
+                        {
+                            "id": "4",
+                            "name": "移动开发"
+                        },
+                        {
+                            "id": "5",
+                            "name": "网络与安全"
+                        }]
+                }, {
+                    name: "生活与兴趣",
+                    type: [
+                        {
+                            "id": "1",
+                            "name": "编程语言"
+                        },
+                        {
+                            "id": "2",
+                            "name": "前端开发"
+                        },
+                        {
+                            "id": "3",
+                            "name": "后端开发",
+                        },
+                        {
+                            "id": "4",
+                            "name": "移动开发"
+                        },
+                        {
+                            "id": "5",
+                            "name": "网络与安全"
+                        }]
+                }, {
+                    name: "创意与设计",
+                    type: [
+                        {
+                            "id": "1",
+                            "name": "编程语言"
+                        },
+                        {
+                            "id": "2",
+                            "name": "前端开发"
+                        },
+                        {
+                            "id": "3",
+                            "name": "后端开发",
+                        },
+                        {
+                            "id": "4",
+                            "name": "移动开发"
+                        },
+                        {
+                            "id": "5",
+                            "name": "网络与安全"
+                        }]
+                }
+            ],
         },
         mounted() {
             this.downloadTouch();
             this.myTouch();
             this.userImageTouch();
             this.searchEvent();
-        },
+        }
+        ,
         methods: {
             // 下载按钮触摸事件
             downloadTouch() {
@@ -175,7 +349,8 @@
                         downloadAppShow.style.display = 'none';
                     }, 0);
                 };
-            },
+            }
+            ,
             //我的学习触碰事件
             myTouch() {
                 var myButton = document.getElementsByClassName('bannerTop-my')[0];
@@ -210,7 +385,8 @@
                         myContent.style.display = 'none';
                     }, 100);
                 };
-            },
+            }
+            ,
             // 用户头像触摸事件
             userImageTouch() {
                 var userImage = document.getElementsByClassName('user-image')[0];
@@ -245,7 +421,8 @@
                         userUl.style.display = 'none';
                     }, 300);
                 };
-            },
+            }
+            ,
             //搜索框事件
             searchEvent() {
                 var searchLeftChangeButton = document.getElementsByClassName('searchNodeLeft')[0];
