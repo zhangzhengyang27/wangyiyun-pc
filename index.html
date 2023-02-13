@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/topBanner.css">
     <link rel="stylesheet" type="text/css" href="css/slider.css">
     <link rel="stylesheet" type="text/css" href="css/openContent.css">
+    <link rel="stylesheet" type="text/css" href="css/live.css">
 </head>
 <body>
 <div id="app">
@@ -183,6 +184,29 @@
                 </li>
             </ul>
         </div>
+    </div>
+
+    <!-- live 课堂直播-->
+    <div class='open-content live'>
+        <h2>课堂直播</h2>
+        <a href="#" class='more'>更多</a>
+        <ul class='live-model'>
+            <li v-for="item in liveList">
+                <a href="#">
+                    <div class='teacher-pic'>
+                        <img src="image/6002D19DCC07E048FBDE4C84D276EB46.jpg">
+                    </div>
+                    <div class='time'>
+                        <span class='live-l'>{{item.time}}</span> <span class="g">开启提醒</span>
+                    </div>
+                    <div class='live-name'>{{item.title}}</div>
+                    <div class='live-teacher-name'>
+                        <span>{{item.author}}</span>
+                        <span>{{item.authorSub}}</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
     </div>
 
 </div>
@@ -394,6 +418,44 @@
                     authorSub: "清华码神",
                     type: "编程小白的Python入门课"
                 }
+            ],
+            liveList: [
+                {
+                    time: "今天 20:00",
+                    title: "1节课教你：如何用Python快速选择优质股票11",
+                    author: "王冕",
+                    authorSub: "网易特邀数据架构专家讲师",
+                },
+                {
+                    time: "今天 20:00",
+                    title: "1节课教你：如何用Python快速选择优质股票11",
+                    author: "王冕",
+                    authorSub: "网易特邀数据架构专家讲师",
+                },
+                {
+                    time: "今天 20:00",
+                    title: "1节课教你：如何用Python快速选择优质股票11",
+                    author: "王冕",
+                    authorSub: "网易特邀数据架构专家讲师",
+                },
+                {
+                    time: "今天 20:00",
+                    title: "1节课教你：如何用Python快速选择优质股票11",
+                    author: "王冕",
+                    authorSub: "网易特邀数据架构专家讲师",
+                }, {
+                    time: "今天 20:00",
+                    title: "1节课教你：如何用Python快速选择优质股票11",
+                    author: "王冕",
+                    authorSub: "网易特邀数据架构专家讲师",
+                }, {
+                    time: "今天 20:00",
+                    title: "1节课教你：如何用Python快速选择优质股票11",
+                    author: "王冕",
+                    authorSub: "网易特邀数据架构专家讲师",
+                },
+
+
             ]
         },
         mounted() {
