@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/web.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/link.css">
+    <link rel="stylesheet" type="text/css" href="css/mask.css">
 </head>
 <body>
 <div id="app">
@@ -256,6 +257,115 @@
                 </a>
             </li>
         </ul>
+    </div>
+
+    <!-- mask 遮罩层-->
+    <div class='mask'></div>
+    <!-- alertNode 兴趣弹窗模块-->
+    <div class='alertNode'>
+        <div class='alertNode-closed' id='alertNodeClosed'></div>
+        <div class='alertNode-topName'>
+            <span class='alertNode-topName-choose'>请选择你的学习兴趣</span>
+            <span class='alertNode-topName-title'>至少选择1个，可随时调整</span>
+        </div>
+        <ul class='alertNode-ul'>
+            <li class='active'>
+                职场提升
+                <div class='line'></div>
+            </li>
+            <li>
+                编程与开发
+                <div class='line'></div>
+            </li>
+            <li>
+                AI/数据科学
+                <div class='line'></div>
+            </li>
+            <li>
+                生活兴趣
+                <div class='line'></div>
+            </li>
+            <li>
+                设计创意
+                <div class='line'></div>
+            </li>
+            <li>
+                产品与运营
+                <div class='line'></div>
+            </li>
+            <li>
+                电商运营
+                <div class='line'></div>
+            </li>
+            <li>
+                职业考试
+                <div class='line'></div>
+            </li>
+            <li class='no'>
+                语言学习
+                <div class='line'></div>
+            </li>
+        </ul>
+        <div class='alertNode-content'>
+            <ul class="show">
+                <li>办公软件</li>
+                <li>效率工具</li>
+                <li>求职准备</li>
+            </ul>
+            <ul>
+                <li>编程语言</li>
+                <li>前端开发</li>
+                <li>后端开发</li>
+            </ul>
+            <ul>
+                <li>人工智能</li>
+                <li>数据科学</li>
+                <li>大数据</li>
+            </ul>
+            <ul>
+                <li class='active'>投资理财</li>
+                <li class='active'>绘画</li>
+                <li class='active'>音乐</li>
+            </ul>
+            <ul>
+                <li>热门软件</li>
+                <li>综合设计</li>
+                <li>手绘插画</li>
+            </ul>
+            <ul>
+                <li>产品经理</li>
+                <li>新媒体运营</li>
+                <li>产品运营</li>
+            </ul>
+            <ul>
+                <li>淘宝电商</li>
+                <li>跨境电商</li>
+                <li>拼多多电商</li>
+            </ul>
+            <ul>
+                <li>计算机认证</li>
+                <li>建筑工程</li>
+                <li>项目管理</li>
+            </ul>
+            <ul>
+                <li>英语能力提升</li>
+                <li>新概念英语</li>
+                <li>职场英语</li>
+            </ul>
+        </div>
+        <ol class='alertNode-ol'>
+            <li class='text'>已选<span id='allNumber'>3</span>个:</li>
+            <li class='active' title="投资理财">投资理财<img src="image/colosd.gif"></li>
+            <li title="绘画">绘画<img src="image/colosd.gif"></li>
+            <li title="音乐">音乐<img src="image/colosd.gif"></li>
+        </ol>
+        <div id='chooseBtnNode'>选好了</div>
+    </div>
+
+    <!-- 更改兴趣模块 -->
+    <div class='interest'>
+        <span class='interest-l'>以下根据你的学习兴趣推荐</span>
+        <span class='interest-r'>更改兴趣</span>
     </div>
 
     <!-- 广告模块 advertisement -->
@@ -639,7 +749,8 @@
             this.slider();
             this.openShow();
             this.bannerShow();
-            this.windowScroll()
+            this.windowScroll();
+            this.changeInterest();
         },
         methods: {
             // 下载按钮触摸事件
@@ -1002,7 +1113,102 @@
                         document.documentElement.scrollTop = document.documentElement.scrollTop - 100 < 0 ? 0 : document.documentElement.scrollTop - 100;
                     }, 0);
                 };
-            }
+            },
+            changeInterest() {
+                var interestBtn = document.getElementsByClassName('interest-r')[0];
+                var mask = document.getElementsByClassName('mask')[0];
+                var alertNode = document.getElementsByClassName('alertNode')[0];
+                var alertNodeUlAllLi = document.getElementsByClassName('alertNode-ul')[0].children;
+                var allUl = document.getElementsByClassName('alertNode-content')[0].children;
+                var allLi = document.getElementsByClassName('alertNode-content')[0].getElementsByTagName('li');
+                var alertNodeOl = document.getElementsByClassName('alertNode-ol')[0];
+                mask.style.transition = '.5s';
+                alertNode.style.transition = '.5s';
+                mask.style.opacity = 0;
+                alertNode.style.opacity = 0;
+                interestBtn.onclick = function () {
+                    mask.style.display = 'block';
+                    alertNode.style.display = 'block';
+                    setTimeout(function () {
+                        mask.style.opacity = 1;
+                        alertNode.style.opacity = 1;
+                    }, 0);
+                    setTimeout(function () {
+                        mask.style.transition = '0s';
+                        alertNode.style.transition = '0s';
+                    }, 500);
+                };
+
+                for (var i = 0; i < alertNodeUlAllLi.length; i++) {
+                    alertNodeUlAllLi[i].index = i;
+                    alertNodeUlAllLi[i].onclick = function () {
+                        for (var j = 0; j < alertNodeUlAllLi.length; j++) {
+                            allUl[j].className = '';
+                            alertNodeUlAllLi[j].className = '';
+                        }
+                        ;
+                        alertNodeUlAllLi[alertNodeUlAllLi.length - 1].className = 'no';
+                        this.className += ' active';
+                        allUl[this.index].className = 'show';
+                    }
+                }
+                ;
+
+                alertNodeOl.onclick = function () {
+                    if (event.target.nodeName == 'IMG') {
+                        for (var i = 0; i < allLi.length; i++) {
+                            if (allLi[i].innerText == event.target.parentNode.title) {
+                                allLi[i].className = '';
+                                break;
+                            }
+                        }
+                        alertNodeOl.removeChild(event.target.parentNode);
+                        allNumber.innerText = alertNodeOl.children.length - 1;
+                        alertNode.style.marginTop = -alertNode.offsetHeight / 2 + 'px';
+                    }
+                };
+
+                for (var i = 0; i < allLi.length; i++) {
+                    allLi[i].onclick = function () {
+                        if (this.className == 'active') {
+                            this.className = '';
+                            for (var i = 0; i < alertNodeOl.children.length; i++) {
+                                if (this.innerText == alertNodeOl.children[i].title) {
+                                    alertNodeOl.removeChild(alertNodeOl.children[i]);
+                                    break;
+                                }
+                            }
+                            ;
+                        } else {
+                            this.className = 'active';
+                            var oLi = document.createElement('li');
+                            oLi.title = this.innerText;
+                            oLi.innerHTML = this.innerText + '<img src="image/colosd.gif">';
+                            alertNodeOl.appendChild(oLi);
+                        }
+                        allNumber.innerText = alertNodeOl.children.length - 1;
+
+                        alertNode.style.marginTop = -alertNode.offsetHeight / 2 + 'px';
+                    };
+                    allLi[i].onmousedown = function () {
+                        return false;
+                    };
+                }
+                ;
+
+                chooseBtnNode.onclick = alertNodeClosed.onclick = function () {
+                    mask.style.transition = '0.5s';
+                    alertNode.style.transition = '0.5s';
+                    setTimeout(function () {
+                        mask.style.opacity = '0';
+                        alertNode.style.opacity = '0';
+                    }, 0);
+                    setTimeout(function () {
+                        mask.style.display = 'none';
+                        alertNode.style.display = 'none';
+                    }, 700);
+                }
+            },
         }
     })
 </script>
