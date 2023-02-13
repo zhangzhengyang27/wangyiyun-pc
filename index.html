@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="css/slider.css">
     <link rel="stylesheet" type="text/css" href="css/openContent.css">
     <link rel="stylesheet" type="text/css" href="css/live.css">
+    <link rel="stylesheet" type="text/css" href="css/system.css">
+    <link rel="stylesheet" type="text/css" href="css/technology.css">
 </head>
 <body>
 <div id="app">
@@ -203,6 +205,36 @@
                     <div class='live-teacher-name'>
                         <span>{{item.author}}</span>
                         <span>{{item.authorSub}}</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- system 系统化学习路径-->
+    <div class='system'>
+        <h2>系统化学习路径</h2><span class='system-title'>网易云课堂六大课程体系，让学习有章有序</span>
+        <ul class='system-ul'>
+            <li><a href="#"><img src="image/b8cbbde8bc98409aad5227fde070df7d.png"></a></li>
+            <li><a href="#"><img src="image/29696616fe6e495a9b191244f2bd0bea.png"></a></li>
+            <li><a href="#"><img src="image/9957cb6a888e40f08c36ce6a96804d32.png"></a></li>
+            <li><a href="#"><img src="image/7594f6916fc94a16af474856d1de8786.png"></a></li>
+            <li><a href="#"><img src="image/96ee5f4a9b954c1991b17ca577aaa00a.png"></a></li>
+            <li class='no'><a href="#"><img src="image/9c3adc02cea44377a91c6716201bbe4c.png"></a></li>
+        </ul>
+    </div>
+
+    <!-- technology 微专业模块 -->
+    <div class='open-content technology'>
+        <h2>微专业</h2>
+        <a href="#" class='more'>更多</a>
+        <ul class='technology-ul'>
+            <li v-for="item in techList">
+                <a href="#">
+                    <div class='technology-ul-outer'><img src="image/wzy-1.gif" class='technology-image'></div>
+                    <div class='technology-content'>
+                        <div class='technology-content-name'>{{item.title}}</div>
+                        <div class='technology-content-title'>{{item.desc}}</div>
                     </div>
                 </a>
             </li>
@@ -456,7 +488,25 @@
                 },
 
 
-            ]
+            ],
+            techList: [
+                {
+                    title: "UI设计师",
+                    desc: "打通全链路，成为独当一面的核心设计师"
+                },
+                {
+                    title: "数据分析-高薪全能班",
+                    desc: "21周高效掌握数据精英必备技能"
+                },
+                {
+                    title: "高级前端开发工程师",
+                    desc: "构建一线互联网企业Web前端全栈知识体系"
+                },
+                {
+                    title: "Java高级架构师",
+                    desc: "精通JAVA/高并发/微服务/分布式/中间件"
+                },
+            ],
         },
         mounted() {
             this.downloadTouch();
