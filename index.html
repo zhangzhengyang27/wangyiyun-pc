@@ -4,18 +4,350 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script src="./js/vue2.6.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/topNode.css">
 </head>
 <body>
 <div id="app">
-    {{ message }}
+    <div class='topNode-copy'></div>
+    <div class="topNode">
+        <div class="topNodeContent">
+            <a href="#" class="logo">
+                <img src="image/logo.gif" alt="">
+            </a>
+            <!--  搜索节点 -->
+            <div class='searchNode'>
+                <div class='searchNodeLeft'>
+                    <span class='searchNodeLeftText'>课程</span>
+                    <ul class='searchNodeLeft-ul'>
+                        <li class='active'>课程</li>
+                        <li>网校</li>
+                    </ul>
+                </div>
+                <input type="" name="" class='searchNodeInput' placeholder="零基础学JavaScript">
+                <a class='searchNodeRight' href="#">搜索</a>
+                <ol class='searchNode-ol'>
+                    <li class='first'>热门搜索</li>
+                </ol>
+            </div>
+            <ul class="bannerTop">
+                <li class='downloadApp'>
+                    <span>下载APP</span>
+                    <div class='line-node'></div>
+                    <div class='downloadApp-show'>
+                        <div class='downloadApp-jt'></div>
+                        <div class='downloadApp-show-left'>
+                            <img src="image/ewm-t-l.gif">
+                        </div>
+                        <p class='downloadApp-show-text'>扫码下载官方App</p>
+                        <a href="#"><img src="image/show-app.gif"></a>
+                        <a href="#"><img src="image/show-app.gif"></a>
+                        <!-- <a href="#"><img src="image/show-ad.gif"></a> -->
+                    </div>
+                </li>
+                <li class='see'>
+                    <span>关注领福利</span>
+                    <div class='line-node'></div>
+                    <div class='see-show'>
+                        <div class='see-show-jt'></div>
+                        <p class='see-show-text'>关注云课堂官方微信号</p>
+                        <p class='see-show-title'>-领取课程免费福利，超值学习资料-</p>
+                        <img class='see-show-img' src="image/ewm-t.gif">
+                    </div>
+                </li>
+                <li>
+                    <span>会员中心</span>
+                    <div class="line-node"></div>
+                </li>
+                <li class="line"></li>
+                <li><span>管理后台</span></li>
+                <li class="bannerTop-my">
+                    <span>我的学习</span>
+                    <div class="bannerTop-my-content">
+                        <div class="user-jt"></div>
+                        <div class="bannerTop-my-content-top">最近学习的课程</div>
+                        <ul class="bannerTop-my-content-ul">
+                            <li v-for="item in myStudy">
+                                <a href="#">
+                                    <div class='bannerTop-my-content-ul-li-left-node'>
+                                        <img :src="item.img">
+                                    </div>
+                                    <p class='bannerTop-my-content-ul-li-right-name'>{{item.name}}</p>
+                                    <p class='bannerTop-my-content-ul-li-right-now'>{{item.nowStufy}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <a class='bannerTop-my-content-more'>查看更多></a>
+                    </div>
+                </li>
+                <li class='bell'></li>
+                <li class='shoppingCart'></li>
+                <li class='line'></li>
+            </ul>
+            <div class="user">
+                <span>李游Leo</span>
+                <img class='user-image' width="34" height="34" src="image/F07F9E9C63CDA35AB0E00DA054402EC2.png">
+                <ul class='user-ul'>
+                    <li class='border-bottom-li'><a href="#">正使用手机账号登陆</a></li>
+                    <li><a href="#"><span class='user-li-span-l'>我的优惠卷</span> <span
+                            class='user-li-span-r'>兑换</span></a>
+                    </li>
+                    <li><a href="#">我的订单</a></li>
+                    <li><a href="#">帮助与反馈</a></li>
+                    <li class='border-bottom-li'><a href="#">设置</a></li>
+                    <li><a href="#">退出</a></li>
+                    <div class='user-jt'></div>
+                </ul>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<script src="./js/vue2.6.0.js"></script>
 
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            message: 'Hello Vue!'
+            message: 'Hello Vue!',
+            myStudy: [{
+                "name": "前端工程师就业班",
+                "img": "image/k-1.png",
+                "nowStufy": "放大与缩小"
+            }, {
+                "name": "Web前端，从零基础到全栈工程师",
+                "img": "image/k-2.png",
+                "nowStufy": ""
+            }, {
+                "name": "前端小白面试指南",
+                "img": "image/k-3.png",
+                "nowStufy": ""
+            }, {
+                "name": "李游Leo - WEB前端公开课",
+                "img": "image/k-4.png",
+                "nowStufy": ""
+            }, {
+                "name": "JavaScript - 移动端开发经典教程",
+                "img": "image/k-5.png",
+                "nowStufy": ""
+            }]
+
+        },
+        mounted() {
+            this.downloadTouch();
+            this.myTouch();
+            this.userImageTouch();
+            this.searchEvent();
+        },
+        methods: {
+            // 下载按钮触摸事件
+            downloadTouch() {
+                var downloadAppBtn = document.getElementsByClassName('downloadApp')[0];
+                var downloadAppShow = document.getElementsByClassName('downloadApp-show')[0];
+                var timer = null;
+
+
+                downloadAppBtn.onmouseover = function () {
+                    console.log("111")
+                    clearTimeout(timer);
+                    if (downloadAppShow.style.display == 'block') return;
+                    downloadAppShow.style.display = 'block';
+                    downloadAppShow.style.display = 'block';
+                    downloadAppShow.style.transform = 'scale(0.9)';
+                    downloadAppShow.style.transition = '0.17s';
+                    setTimeout(function () {
+                        downloadAppShow.style.transform = 'scale(1)';
+                    }, 0);
+                };
+
+                downloadAppBtn.onmouseout = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        downloadAppShow.style.display = 'none';
+                    }, 0);
+                };
+
+                downloadAppShow.onmouseover = function () {
+                    clearTimeout(timer);
+                };
+                downloadAppShow.onmouseout = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        downloadAppShow.style.display = 'none';
+                    }, 0);
+                };
+            },
+            //我的学习触碰事件
+            myTouch() {
+                var myButton = document.getElementsByClassName('bannerTop-my')[0];
+                var myContent = document.getElementsByClassName('bannerTop-my-content')[0];
+                var timer = null;
+
+                myButton.onmouseover = function () {
+                    clearTimeout(timer);
+                    if (myContent.style.display == 'block') return;
+                    myContent.style.display = 'block';
+                    myContent.style.display = 'block';
+                    myContent.style.transform = 'scale(0.9)';
+                    myContent.style.transition = '0.17s';
+                    setTimeout(function () {
+                        myContent.style.transform = 'scale(1)';
+                    }, 0);
+                };
+
+                myButton.onmouseout = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        myContent.style.display = 'none';
+                    }, 100);
+                };
+
+                myContent.onmouseover = function () {
+                    clearTimeout(timer);
+                };
+                myContent.onmouseout = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        myContent.style.display = 'none';
+                    }, 100);
+                };
+            },
+            // 用户头像触摸事件
+            userImageTouch() {
+                var userImage = document.getElementsByClassName('user-image')[0];
+                var userUl = document.getElementsByClassName('user-ul')[0];
+                var myContent = document.getElementsByClassName('bannerTop-my-content')[0];
+                var timer = null;
+
+                userImage.onmouseover = function () {
+                    clearTimeout(timer);
+                    if (userUl.style.display == 'block') return;
+                    myContent.style.display = 'none';
+                    userUl.style.display = 'block';
+                    userUl.style.transform = 'scale(0.9)';
+                    userUl.style.transition = '0.17s';
+                    setTimeout(function () {
+                        userUl.style.transform = 'scale(1)';
+                    }, 0);
+                }
+                userImage.onmouseout = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        userUl.style.display = 'none';
+                    }, 300);
+                };
+
+                userUl.onmouseover = function () {
+                    clearTimeout(timer);
+                };
+                userUl.onmouseout = function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        userUl.style.display = 'none';
+                    }, 300);
+                };
+            },
+            //搜索框事件
+            searchEvent() {
+                var searchLeftChangeButton = document.getElementsByClassName('searchNodeLeft')[0];
+                var searchLeftUl = document.getElementsByClassName('searchNodeLeft-ul')[0];
+                var searchLeftUlAllNode = searchLeftUl.children;
+                var searchShowOl = document.getElementsByClassName('searchNode-ol')[0];
+                var searchInput = document.getElementsByClassName('searchNodeInput')[0];
+                var searchNodeLeftText = document.getElementsByClassName('searchNodeLeftText')[0];
+                var searchShowOlAllNode = searchShowOl.children;
+                var context = {
+                    'k': ['摄影', '产品可视化', 'AI必学-Tensorflow', '产品经理', 'AE'],
+                    'w': ['城市', '滨州医学院', '51', 'edufancy', '北京理工大学']
+                };
+
+
+                window.onclick = function () {
+                    searchShowOl.style.display = 'none';
+                }
+                ToOlContent('k');
+
+                function ToOlContent(text) {
+
+                    var searchShowOlAllNode = searchShowOl.children;
+                    searchShowOl.innerHTML = "<li class='first'>热门搜索</li>"
+                    searchShowOlAllNode[0].onclick = function () {
+                        event.cancelBubble = true;
+                    };
+                    for (var i = 0; i < context[text].length; i++) {
+                        var oLi = document.createElement('li');
+                        oLi.innerHTML = '<a href="#">' + context[text][i] + '</a>';
+                        searchShowOl.appendChild(oLi);
+                    }
+                    for (var i = 1; i < searchShowOlAllNode.length; i++) {
+                        searchShowOlAllNode[i].onclick = function () {
+                            event.cancelBubble = true;
+                            searchShowOl.style.display = 'none';
+
+                        }
+                    }
+                }
+
+
+                for (var i = 0; i < searchLeftUlAllNode.length; i++) {
+                    searchLeftUlAllNode[i].onclick = function () {
+                        event.cancelBubble = true;
+                        for (var i = 0; i < searchLeftUlAllNode.length; i++) {
+                            searchLeftUlAllNode[i].className = '';
+                        }
+                        ;
+                        searchNodeLeftText.innerHTML = this.innerHTML;
+                        this.className = 'active';
+                        searchLeftUl.style.display = 'none';
+                        OlShow();
+
+                        if (this.innerHTML == '网校') {
+                            searchInput.placeholder = '搜索网校';
+                            ToOlContent('w')
+                        } else {
+                            searchInput.placeholder = '零基础学JavaScript';
+                            ToOlContent('k')
+                        }
+                    };
+                }
+                ;
+
+                searchLeftChangeButton.onmouseover = function () {
+                    //console.log(event.target.nodeName);
+                    if (event.target.nodeName == 'DIV' || event.target.nodeName == 'SPAN') {
+                        searchLeftChangeButton.className = 'searchNodeLeft active';
+                    } else {
+                        searchLeftChangeButton.className = 'searchNodeLeft';
+                    }
+                };
+                searchLeftChangeButton.onmouseout = function () {
+                    searchLeftChangeButton.className = 'searchNodeLeft';
+                }
+
+                function OlShow() {
+                    searchShowOl.style.transition = '0.7s';
+                    searchShowOl.style.opacity = '0';
+                    searchShowOl.style.display = 'block';
+                    setTimeout(function () {
+                        searchShowOl.style.opacity = '1';
+                    }, 0);
+                }
+
+                searchInput.onclick = function () {
+                    event.cancelBubble = true;
+                    OlShow();
+                }
+                //searchInput.onfocus = OlShow;
+
+                searchLeftChangeButton.onmouseenter = function () {
+                    searchLeftUl.style.display = 'block';
+                    searchShowOl.style.display = 'none';
+                };
+
+                searchLeftChangeButton.onmouseleave = function () {
+                    searchLeftUl.style.display = 'none';
+                };
+
+            }
         }
     })
 </script>
